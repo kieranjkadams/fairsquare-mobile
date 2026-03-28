@@ -1,19 +1,12 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 abstract class AppConstants {
-  // Supabase - these must be set via --dart-define or env
-  static const supabaseUrl = String.fromEnvironment(
-    'SUPABASE_URL',
-    defaultValue: '',
-  );
-  static const supabaseAnonKey = String.fromEnvironment(
-    'SUPABASE_ANON_KEY',
-    defaultValue: '',
-  );
+  // Supabase - loaded from .env file
+  static String get supabaseUrl => dotenv.env['SUPABASE_URL'] ?? '';
+  static String get supabaseAnonKey => dotenv.env['SUPABASE_ANON_KEY'] ?? '';
 
   // Admin
-  static const adminUserId = String.fromEnvironment(
-    'ADMIN_USER_ID',
-    defaultValue: '',
-  );
+  static String get adminUserId => dotenv.env['ADMIN_USER_ID'] ?? '';
 
   // Storage buckets
   static const mortgageStatementsBucket = 'mortgage-statements';
