@@ -26,30 +26,64 @@ final routerProvider = Provider<GoRouter>((ref) {
           state.matchedLocation == '/signup' ||
           state.matchedLocation == '/forgot-password';
 
-      if (!isLoggedIn && !isAuthRoute) return '/login';
-      if (isLoggedIn && isAuthRoute) return '/dashboard';
+      if (!isLoggedIn && !isAuthRoute) {
+        return '/login';
+      }
+      if (isLoggedIn && isAuthRoute) {
+        return '/dashboard';
+      }
       return null;
     },
     routes: [
-      GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
-      GoRoute(path: '/signup', builder: (context, state) => const SignupScreen()),
-      GoRoute(path: '/forgot-password', builder: (context, state) => const ForgotPasswordScreen()),
+      // Auth routes
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/signup',
+        builder: (context, state) => const SignupScreen(),
+      ),
+      GoRoute(
+        path: '/forgot-password',
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+
+      // Main app shell with bottom navigation
       ShellRoute(
         builder: (context, state, child) => AppShell(child: child),
         routes: [
-          GoRoute(path: '/dashboard', builder: (context, state) => const DashboardScreen()),
-          GoRoute(path: '/notifications', builder: (context, state) => const NotificationsScreen()),
-          GoRoute(path: '/settings', builder: (context, state) => const SettingsScreen()),
-          GoRoute(path: '/admin', builder: (context, state) => const AdminScreen()),
+          GoRoute(
+            path: '/dashboard',
+            builder: (context, state) => const DashboardScreen(),
+          ),
+          GoRoute(
+            path: '/notifications',
+            builder: (context, state) => const NotificationsScreen(),
+          ),
+          GoRoute(
+            path: '/settings',
+            builder: (context, state) => const SettingsScreen(),
+          ),
+          GoRoute(
+            path: '/admin',
+            builder: (context, state) => const AdminScreen(),
+          ),
         ],
       ),
+
+      // Detail routes (no bottom nav)
       GoRoute(
         path: '/property/:id',
-        builder: (context, state) => PropertyDetailScreen(propertyId: state.pathParameters['id']!),
+        builder: (context, state) => PropertyDetailScreen(
+          propertyId: state.pathParameters['id']!,
+        ),
       ),
       GoRoute(
         path: '/property/:id/add-transaction',
-        builder: (context, state) => AddTransactionScreen(propertyId: state.pathParameters['id']!),
+        builder: (context, state) => AddTransactionScreen(
+          propertyId: state.pathParameters['id']!,
+        ),
       ),
     ],
   );

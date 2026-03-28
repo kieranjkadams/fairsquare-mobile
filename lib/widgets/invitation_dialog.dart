@@ -102,20 +102,46 @@ class _InvitationDialogState extends State<InvitationDialog> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(inv.propertyName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                  Text(
+                    inv.propertyName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
                   if (inv.propertyAddress != null)
-                    Text(inv.propertyAddress!, style: TextStyle(color: AppTheme.textSecondary, fontSize: 14)),
+                    Text(
+                      inv.propertyAddress!,
+                      style: TextStyle(
+                        color: AppTheme.textSecondary,
+                        fontSize: 14,
+                      ),
+                    ),
                   const SizedBox(height: 4),
                   Text(
-                    'Invited by ${inv.invitedByName ?? 'the owner'} (${inv.plannedContribution.toStringAsFixed(1)}% share)',
-                    style: TextStyle(color: AppTheme.textMuted, fontSize: 13),
+                    'Invited by ${inv.invitedByName ?? 'the owner'} '
+                    '(${inv.plannedContribution.toStringAsFixed(1)}% share)',
+                    style: TextStyle(
+                      color: AppTheme.textMuted,
+                      fontSize: 13,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Expanded(child: OutlinedButton(onPressed: _loading ? null : () => _decline(inv), child: const Text('Decline'))),
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: _loading ? null : () => _decline(inv),
+                          child: const Text('Decline'),
+                        ),
+                      ),
                       const SizedBox(width: 12),
-                      Expanded(child: ElevatedButton(onPressed: _loading ? null : () => _accept(inv), child: const Text('Accept'))),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _loading ? null : () => _accept(inv),
+                          child: const Text('Accept'),
+                        ),
+                      ),
                     ],
                   ),
                 ],

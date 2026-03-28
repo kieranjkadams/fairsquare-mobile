@@ -62,10 +62,14 @@ class AppShell extends ConsumerWidget {
         currentIndex: index.clamp(0, destinations.length - 1),
         onTap: (i) {
           switch (i) {
-            case 0: context.go('/dashboard');
-            case 1: context.go('/notifications');
-            case 2: context.go('/settings');
-            case 3: if (isAdmin) context.go('/admin');
+            case 0:
+              context.go('/dashboard');
+            case 1:
+              context.go('/notifications');
+            case 2:
+              context.go('/settings');
+            case 3:
+              if (isAdmin) context.go('/admin');
           }
         },
         items: destinations,

@@ -6,8 +6,13 @@ class BiometricService {
   final _auth = LocalAuthentication();
   static const _biometricEnabledKey = 'biometric_enabled';
 
-  Future<bool> isDeviceSupported() async => await _auth.isDeviceSupported();
-  Future<bool> canCheckBiometrics() async => await _auth.canCheckBiometrics;
+  Future<bool> isDeviceSupported() async {
+    return await _auth.isDeviceSupported();
+  }
+
+  Future<bool> canCheckBiometrics() async {
+    return await _auth.canCheckBiometrics;
+  }
 
   Future<bool> isBiometricEnabled() async {
     final prefs = await SharedPreferences.getInstance();
@@ -23,7 +28,10 @@ class BiometricService {
     try {
       return await _auth.authenticate(
         localizedReason: reason,
-        options: const AuthenticationOptions(stickyAuth: true, biometricOnly: true),
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+        ),
       );
     } on PlatformException {
       return false;

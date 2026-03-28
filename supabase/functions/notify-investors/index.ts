@@ -113,7 +113,7 @@ serve(async (req: Request) => {
           to: t.token,
           notification: {
             title: `New transaction on ${property.name}`,
-            body: `${paidByName} added a ${categoryLabel} of ${amount} \u2014 check your balance`,
+            body: `${paidByName} added a ${categoryLabel} of ${amount} — check your balance`,
           },
           data: {
             propertyId: transaction.property_id,

@@ -6,15 +6,20 @@ class NotificationService {
   final _messaging = FirebaseMessaging.instance;
 
   Future<void> initialize() async {
+    // Request permission
     await _messaging.requestPermission(
-      alert: true, badge: true, sound: true,
+      alert: true,
+      badge: true,
+      sound: true,
     );
 
+    // Get and register token
     final token = await _messaging.getToken();
     if (token != null) {
       await _registerToken(token);
     }
 
+    // Listen for token refresh
     _messaging.onTokenRefresh.listen(_registerToken);
   }
 
@@ -22,11 +27,17 @@ class NotificationService {
     final userId = SupabaseService.currentUserId;
     if (userId == null) return;
 
-    final platform = defaultTargetPlatform == TargetPlatform.iOS ? 'ios' : 'android';
+    final platform = defaultTargetPlatform == TargetPlatform.iOS
+        ? 'ios'
+        : 'android';
 
     try {
       await SupabaseService.client.from('push_tokens').upsert(
-        {'user_id': userId, 'token': token, 'platform': platform},
+        {
+          'user_id': userId,
+          'token': token,
+          'platform': platform,
+        },
         onConflict: 'user_id,token',
       );
     } catch (e) {

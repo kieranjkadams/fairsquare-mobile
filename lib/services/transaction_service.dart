@@ -9,6 +9,7 @@ class TransactionService {
   final _client = SupabaseService.client;
   final _uuid = const Uuid();
 
+  /// Fetches non-auto-generated transactions for a property.
   Future<List<Transaction>> getTransactions(String propertyId) async {
     final response = await _client
         .from('transactions')
@@ -20,6 +21,7 @@ class TransactionService {
     return response.map<Transaction>((e) => Transaction.fromJson(e)).toList();
   }
 
+  /// Fetches all transactions (including auto-generated) for balance calculation.
   Future<List<Transaction>> getAllTransactions(String propertyId) async {
     final response = await _client
         .from('transactions')
@@ -30,16 +32,21 @@ class TransactionService {
     return response.map<Transaction>((e) => Transaction.fromJson(e)).toList();
   }
 
-  Future<List<TransactionPayment>> getTransactionPayments(String transactionId) async {
+  /// Fetches payments for a transaction.
+  Future<List<TransactionPayment>> getTransactionPayments(
+      String transactionId) async {
     final response = await _client
         .from('transaction_payments')
         .select()
         .eq('transaction_id', transactionId)
         .order('payment_date');
 
-    return response.map<TransactionPayment>((e) => TransactionPayment.fromJson(e)).toList();
+    return response
+        .map<TransactionPayment>((e) => TransactionPayment.fromJson(e))
+        .toList();
   }
 
+  /// Creates a new transaction.
   Future<Transaction> createTransaction({
     required String propertyId,
     required String category,
@@ -92,6 +99,7 @@ class TransactionService {
     return Transaction.fromJson(response);
   }
 
+  /// Generates a signed URL for a document.
   Future<String> getSignedUrl(String path) async {
     return await SupabaseService.storage
         .from(AppConstants.transactionDocumentsBucket)
