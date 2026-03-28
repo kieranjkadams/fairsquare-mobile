@@ -20,17 +20,29 @@ class Mortgage extends Equatable {
   final DateTime updatedAt;
 
   const Mortgage({
-    required this.id, required this.propertyId, required this.balance,
-    required this.balanceDate, required this.rate, required this.payment,
-    required this.frequency, required this.nextPayment, this.pmiAmount,
-    this.lender, this.renewalDate, required this.rateType, this.paidBy,
-    this.originationDate, this.originalBalance, required this.createdAt,
+    required this.id,
+    required this.propertyId,
+    required this.balance,
+    required this.balanceDate,
+    required this.rate,
+    required this.payment,
+    required this.frequency,
+    required this.nextPayment,
+    this.pmiAmount,
+    this.lender,
+    this.renewalDate,
+    required this.rateType,
+    this.paidBy,
+    this.originationDate,
+    this.originalBalance,
+    required this.createdAt,
     required this.updatedAt,
   });
 
   factory Mortgage.fromJson(Map<String, dynamic> json) {
     return Mortgage(
-      id: json['id'] as String, propertyId: json['property_id'] as String,
+      id: json['id'] as String,
+      propertyId: json['property_id'] as String,
       balance: (json['balance'] as num).toDouble(),
       balanceDate: DateTime.parse(json['balance_date'] as String),
       rate: (json['rate'] as num).toDouble(),
@@ -39,10 +51,14 @@ class Mortgage extends Equatable {
       nextPayment: DateTime.parse(json['next_payment'] as String),
       pmiAmount: (json['pmi_amount'] as num?)?.toDouble(),
       lender: json['lender'] as String?,
-      renewalDate: json['renewal_date'] != null ? DateTime.parse(json['renewal_date'] as String) : null,
+      renewalDate: json['renewal_date'] != null
+          ? DateTime.parse(json['renewal_date'] as String)
+          : null,
       rateType: json['rate_type'] as String,
       paidBy: json['paid_by'] as String?,
-      originationDate: json['origination_date'] != null ? DateTime.parse(json['origination_date'] as String) : null,
+      originationDate: json['origination_date'] != null
+          ? DateTime.parse(json['origination_date'] as String)
+          : null,
       originalBalance: (json['original_balance'] as num?)?.toDouble(),
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),

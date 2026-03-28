@@ -10,18 +10,22 @@ import 'auth_provider.dart';
 final propertyServiceProvider = Provider<PropertyService>((ref) => PropertyService());
 
 final propertiesProvider = FutureProvider<List<Property>>((ref) async {
+  // Re-fetch when auth state changes
   ref.watch(authStateProvider);
   return ref.watch(propertyServiceProvider).getProperties();
 });
 
-final investorsProvider = FutureProvider.family<List<Investor>, String>((ref, propertyId) async {
+final investorsProvider =
+    FutureProvider.family<List<Investor>, String>((ref, propertyId) async {
   return ref.watch(propertyServiceProvider).getInvestors(propertyId);
 });
 
-final mortgageProvider = FutureProvider.family<Mortgage?, String>((ref, propertyId) async {
+final mortgageProvider =
+    FutureProvider.family<Mortgage?, String>((ref, propertyId) async {
   return ref.watch(propertyServiceProvider).getMortgage(propertyId);
 });
 
-final valuationProvider = FutureProvider.family<Valuation?, String>((ref, propertyId) async {
+final valuationProvider =
+    FutureProvider.family<Valuation?, String>((ref, propertyId) async {
   return ref.watch(propertyServiceProvider).getLatestValuation(propertyId);
 });

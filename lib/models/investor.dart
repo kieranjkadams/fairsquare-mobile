@@ -13,9 +13,15 @@ class Investor extends Equatable {
   final DateTime createdAt;
 
   const Investor({
-    required this.id, required this.propertyId, this.userId, required this.name,
-    required this.plannedContribution, required this.actualContribution,
-    this.invitedEmail, this.invitedByName, required this.invitationStatus,
+    required this.id,
+    required this.propertyId,
+    this.userId,
+    required this.name,
+    required this.plannedContribution,
+    required this.actualContribution,
+    this.invitedEmail,
+    this.invitedByName,
+    required this.invitationStatus,
     required this.createdAt,
   });
 
@@ -25,8 +31,10 @@ class Investor extends Equatable {
 
   factory Investor.fromJson(Map<String, dynamic> json) {
     return Investor(
-      id: json['id'] as String, propertyId: json['property_id'] as String,
-      userId: json['user_id'] as String?, name: json['name'] as String,
+      id: json['id'] as String,
+      propertyId: json['property_id'] as String,
+      userId: json['user_id'] as String?,
+      name: json['name'] as String,
       plannedContribution: (json['planned_contribution'] as num).toDouble(),
       actualContribution: (json['actual_contribution'] as num).toDouble(),
       invitedEmail: json['invited_email'] as String?,
@@ -37,10 +45,16 @@ class Investor extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id, 'property_id': propertyId, 'user_id': userId, 'name': name,
-    'planned_contribution': plannedContribution, 'actual_contribution': actualContribution,
-    'invited_email': invitedEmail, 'invited_by_name': invitedByName,
-    'invitation_status': invitationStatus, 'created_at': createdAt.toIso8601String(),
+    'id': id,
+    'property_id': propertyId,
+    'user_id': userId,
+    'name': name,
+    'planned_contribution': plannedContribution,
+    'actual_contribution': actualContribution,
+    'invited_email': invitedEmail,
+    'invited_by_name': invitedByName,
+    'invitation_status': invitationStatus,
+    'created_at': createdAt.toIso8601String(),
   };
 
   @override

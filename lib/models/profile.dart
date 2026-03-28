@@ -6,7 +6,12 @@ class Profile extends Equatable {
   final String? fullName;
   final DateTime createdAt;
 
-  const Profile({required this.id, required this.email, this.fullName, required this.createdAt});
+  const Profile({
+    required this.id,
+    required this.email,
+    this.fullName,
+    required this.createdAt,
+  });
 
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
@@ -18,12 +23,19 @@ class Profile extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id, 'email': email, 'full_name': fullName,
+    'id': id,
+    'email': email,
+    'full_name': fullName,
     'created_at': createdAt.toIso8601String(),
   };
 
   Profile copyWith({String? fullName, String? email}) {
-    return Profile(id: id, email: email ?? this.email, fullName: fullName ?? this.fullName, createdAt: createdAt);
+    return Profile(
+      id: id,
+      email: email ?? this.email,
+      fullName: fullName ?? this.fullName,
+      createdAt: createdAt,
+    );
   }
 
   @override

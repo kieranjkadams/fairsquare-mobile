@@ -7,7 +7,13 @@ class Invitation extends Equatable {
   final String? invitedByName;
   final double plannedContribution;
 
-  const Invitation({required this.investorId, required this.propertyName, this.propertyAddress, this.invitedByName, required this.plannedContribution});
+  const Invitation({
+    required this.investorId,
+    required this.propertyName,
+    this.propertyAddress,
+    this.invitedByName,
+    required this.plannedContribution,
+  });
 
   factory Invitation.fromJson(Map<String, dynamic> json) {
     return Invitation(

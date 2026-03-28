@@ -11,15 +11,22 @@ class Property extends Equatable {
   final DateTime createdAt;
 
   const Property({
-    required this.id, required this.userId, required this.name, this.address,
-    required this.purchasePrice, this.downPaymentPercent = 20, this.currency = 'CAD',
+    required this.id,
+    required this.userId,
+    required this.name,
+    this.address,
+    required this.purchasePrice,
+    this.downPaymentPercent = 20,
+    this.currency = 'CAD',
     required this.createdAt,
   });
 
   factory Property.fromJson(Map<String, dynamic> json) {
     return Property(
-      id: json['id'] as String, userId: json['user_id'] as String,
-      name: json['name'] as String, address: json['address'] as String?,
+      id: json['id'] as String,
+      userId: json['user_id'] as String,
+      name: json['name'] as String,
+      address: json['address'] as String?,
       purchasePrice: (json['purchase_price'] as num).toDouble(),
       downPaymentPercent: (json['down_payment_percent'] as num?)?.toDouble() ?? 20,
       currency: json['currency'] as String? ?? 'CAD',
@@ -28,9 +35,14 @@ class Property extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-    'id': id, 'user_id': userId, 'name': name, 'address': address,
-    'purchase_price': purchasePrice, 'down_payment_percent': downPaymentPercent,
-    'currency': currency, 'created_at': createdAt.toIso8601String(),
+    'id': id,
+    'user_id': userId,
+    'name': name,
+    'address': address,
+    'purchase_price': purchasePrice,
+    'down_payment_percent': downPaymentPercent,
+    'currency': currency,
+    'created_at': createdAt.toIso8601String(),
   };
 
   @override

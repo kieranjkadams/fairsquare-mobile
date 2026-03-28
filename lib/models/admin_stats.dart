@@ -9,7 +9,15 @@ class AdminStats extends Equatable {
   final int newPropertiesThisMonth;
   final int transactionsThisMonth;
 
-  const AdminStats({required this.totalUsers, required this.totalProperties, required this.totalInvestors, required this.totalTransactions, required this.newUsersThisMonth, required this.newPropertiesThisMonth, required this.transactionsThisMonth});
+  const AdminStats({
+    required this.totalUsers,
+    required this.totalProperties,
+    required this.totalInvestors,
+    required this.totalTransactions,
+    required this.newUsersThisMonth,
+    required this.newPropertiesThisMonth,
+    required this.transactionsThisMonth,
+  });
 
   factory AdminStats.fromJson(Map<String, dynamic> json) {
     return AdminStats(
@@ -24,5 +32,10 @@ class AdminStats extends Equatable {
   }
 
   @override
-  List<Object?> get props => [totalUsers, totalProperties, totalInvestors, totalTransactions];
+  List<Object?> get props => [
+    totalUsers,
+    totalProperties,
+    totalInvestors,
+    totalTransactions,
+  ];
 }
